@@ -8,7 +8,7 @@ class TestHotelsAPI(LiveServerTestCase):
         self.valid_coord = '52.5200,13.4050'
         self.invalid_coord = '51.9173,1000'
         self.client = RequestsClient()
-        self.api_url = f"{self.live_server_url}{reverse('hotels-search-api')}"
+        self.api_url = f"{self.live_server_url}{reverse('hotels:hotels-search-api')}"
 
     def test_hotels_api_correct_coord(self):
         final_api_url = f"{self.api_url}?at={self.valid_coord}"
