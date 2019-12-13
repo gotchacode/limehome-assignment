@@ -35,5 +35,8 @@ class HotelAPIView(APIView):
         category = "hotel"
         final_url = f"{url}?at={at}&cat={category}&app_id={app_id}&app_code={app_code}"
         response = requests.get(final_url)
-        return Response(data=response.json(), status=status.HTTP_200_OK)
+        if response.status_code == 200:
+            results = response.json()['results']['items']
+            return Response(data=results, status=status.HTTP_200_OK)
+        return Response(data=[], status=status.HTTP_404_NOT_FOUND)
 
