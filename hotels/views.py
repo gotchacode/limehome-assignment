@@ -10,18 +10,28 @@ from rest_framework import status
 # Create your views here.
 class HotelAPIView(APIView):
     """
-    The problem statement clearly says we need to find hotels, so we will just
-    hardcode that for simplicity
 
-    The main questions here is if we want just proxy the result or maintain
+
+    The main question here is if we want just proxy the result or maintain
     the record in the DB itself.
 
-    Merits of maintaingin in DB:
+    ## Current Approach
+
+    Talk to the API, get and return the result if that status is 200, else
+    just send 404 along with an empty array
+
+
+    ## Another approach:
+    - Write LocationSerializers that serialize the incoming result and then
+    save it in db. The result is then returned from DB, taking advantage of all
+    goodies that comes up with Django REST Framework. Implementing this takes more time.
+
+    ### Advantages:
     - same result do not need API call to the location API backend.
     - It also gives faster result, as the result is obtained from the db directly
     rather than going over the wire.
 
-    Disadvantages:
+    ### Disadvantages:
     - We need to obtain the whole dataset for it to be same as the API backend result.
     - There is a minor chance of this data being stale and we need to implement some sort
     of cache invalidation here.
@@ -31,9 +41,9 @@ class HotelAPIView(APIView):
         url = settings.API_REQUEST_BASE_URL
         app_id = settings.APP_ID
         app_code = settings.APP_CODE
-        at = request.query_params.get("at")
+        coord = request.query_params.get("coord")
         category = "hotel"
-        final_url = f"{url}?at={at}&cat={category}&app_id={app_id}&app_code={app_code}"
+        final_url = f"{url}?at={coord}&cat={category}&app_id={app_id}&app_code={app_code}"
         response = requests.get(final_url)
         if response.status_code == 200:
             results = response.json()['results']['items']
