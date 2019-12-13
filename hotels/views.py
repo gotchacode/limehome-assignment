@@ -7,11 +7,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-# Create your views here.
+
 class HotelAPIView(APIView):
     """
-
-
     The main question here is if we want just proxy the result or maintain
     the record in the DB itself.
 
