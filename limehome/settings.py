@@ -140,4 +140,3 @@ STATIC_URL = '/static/'
 API_REQUEST_BASE_URL = env('API_REQUEST_BASE_URL', None)
 APP_ID = env('APP_ID', None)
 APP_CODE = env('APP_CODE', None)
-print(API_REQUEST_BASE_URL)
