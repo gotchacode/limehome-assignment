@@ -2,6 +2,7 @@ Coding-challange
 --------------
 
 Assignment topic here [assignment](./assignment.md)
+
 ![Screenshot](./limehome.png)
 
 ## Setup and Installation
@@ -14,7 +15,6 @@ docker-compose run web python manage.py migrate # run the migrations
 docker-compose run web python manage.py createsuperuser # to create the superuser
 ```
 
-
 ## Running the project
 
 In order to run the project, run this command:
@@ -25,6 +25,14 @@ docker-compose run --service-ports web
 
 This command ensures, that the server will run and pause it's execution if a debugger is set somewhere
 in the code
+
+```python
+
+def somefunc():
+  a = 1
+  import pdb; pdb.set_trace()
+  return a
+```
 
 
 ## Running the tests:
@@ -45,14 +53,6 @@ hotels/tests/test_views.py ..
 ======================================================= 2 passed in 5.05s ========================================================
 ```
 
-```python
-
-def somefunc():
-  a = 1
-  import pdb; pdb.set_trace()
-  return a
-```
-
 
 ## API Testing
 
@@ -60,7 +60,7 @@ The API and docs can be found here: http://localhost:8000/apiv1/hotels/list/
 
 An example call is here: http://localhost:8000/apiv1/hotels/list/?coord=52.5200,13.4050
 
-This above API returns the list of hotels around the co-ordinate of Berlin.
+A sample API response returns the list of hotels around the co-ordinate of Berlin.
 
 
 ```json
